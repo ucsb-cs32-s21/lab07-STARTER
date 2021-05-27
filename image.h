@@ -22,9 +22,6 @@ class image  {
 	    void setPixel(int x, int y, color in) {
 	    	thePixels.at(mapXY(x,y)) = in;
 	    }
-	    color getPixel(int x, int y) {
-	    	return thePixels.at(mapXY(x,y));
-	    }
 	    void fullWriteOut(ostream& out);
 
 	private:

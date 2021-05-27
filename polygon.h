@@ -4,56 +4,43 @@
 #include "vec2.h"
 #include "color.h"
 #include "shape.h"
-#include <algorithm>
 
-/* simple data representation of an implicit ellipse */
+/* simple data representation of a convex polygon - defined by a list of vertices */
 class Polygon : public shape {
   public:
-
-	Polygon(vec2 v1, double d, color C) : shape{C,d} {
-		theVerts.push_back(v1);
+	Polygon(std::vector<vec2> inVerts, double d, color C) : shape{C, d},  
+	theVerts(inVerts) {
+		if (this->concave()) {
+			std::cerr << "Not convex will not draw as expected" << std::endl;
+		}
 	}
 
 	bool eval(double x, double y) override;
 	void addVert(vec2 inV) { theVerts.push_back(inV); }
+	void setDepth(double inD) {depth = inD; }
 
-	double getMinX() {
-		return min_element(theVerts.begin(), theVerts.end(), [](vec2 l, vec2 r){
-					return l.x() < r.x();
-      				}
-      			)->x();
-	}
+	bool concave();
 
-	double getMinY() {
-		vec2 min 
-      		= *min_element(theVerts.begin(), theVerts.end(), [](vec2 l, vec2 r){
-					return l.y() < r.y();
-      				}
-      			);
-      	return min.y();
+	void translate(vec2 offSet)  { 
+		for (int i=0; i < theVerts.size(); i++ ){
+			theVerts[i] += offSet;
+		}
 	}
+	void scale(double s){
+		for (int i=0; i < theVerts.size(); i++)
+			theVerts.at(i) *= s;
+	}
+	//vec2 getCenter() override { vec2 cOm = vec2(0); for (auto v : theVerts) cOm += v; return 1.0/(theVerts.size())*cOm;}
 
-	double getMaxX() {
-		vec2 max 
-      		= *max_element(theVerts.begin(), theVerts.end(), [](vec2 l, vec2 r){
-					return l.x() < r.x();
-      				}
-      			);
-      	return max.x();
-	}
+	std::vector<vec2> getTheVerts() const { return theVerts; }
 
-	double getMaxY(){
-		vec2 max 
-      		= *max_element(theVerts.begin(), theVerts.end(), [](vec2 l, vec2 r){
-					return l.y() < r.y();
-      				}
-      			);
-      	return max.y();
-	}
+	double getMinX();
+	double getMinY();
+	double getMaxX();
+	double getMaxY();
 
   private:
-	std::vector<vec2> theVerts;
-
+	std::vector<vec2> theVerts; //keep the vertices local to polygon
 };
 
 #endif
