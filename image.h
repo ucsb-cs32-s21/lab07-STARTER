@@ -25,7 +25,7 @@ class image  {
 	    void fullWriteOut(ostream& out);
 
 	private:
-		int mapXY(int x, int y) {return y*(width-1) + x; }
+		int mapXY(int x, int y) {return y*(width) + x; }
 		int width;
 		int height;
 		vector<color> thePixels;
