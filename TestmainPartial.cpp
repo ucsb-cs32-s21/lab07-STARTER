@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 	theShapes.push_back(t5);
 	
 	/*ellipse with zero divisor*/
-	theShapes.push_back(make_shared<ellipse>(vec2(150, 150), 0.0, 14, color(250)));	
+	theShapes.push_back(make_shared<ellipse>(vec2(150, 150), 0, 0, 14, color(250)));	
 	
 	//rect with reversed corners
 	theShapes.push_back(make_shared<Rect>(vec2(170, 80), vec2(120, 60), color(250), 8));
@@ -84,13 +84,13 @@ int main(int argc, char *argv[]) {
 	theShapes.push_back(t6);
 
 	/*ellipse out of bounds*/
-	theShapes.push_back(make_shared<ellipse>(vec2(150, -2), 4, 28, color(250)));	
+	theShapes.push_back(make_shared<ellipse>(vec2(150, -2), 4, 28, 14, color(250)));	
 
 	//rect out of bounds and inverted vertices */
 	theShapes.push_back(make_shared<Rect>(vec2(10, 210), vec2(-10, 240), color(250), 4));
 
 	/*ellipse out of bounds and zero radius! */
-	theShapes.push_back(make_shared<ellipse>(vec2(-2, 50), 40, 0, color(250)));	
+	theShapes.push_back(make_shared<ellipse>(vec2(-2, 50), 40, 0, 14, color(250)));		
 
 	/*polygon out of bounds  and concave!*/
 	vector<vec2> Verts5;
