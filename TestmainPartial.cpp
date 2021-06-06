@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 	theShapes.push_back(t5);
 	
 	/*ellipse with zero divisor*/
-	theShapes.push_back(make_shared<ellipse>(vec2(150, 150), 0, 0, 14, color(250)));	
+	theShapes.push_back(make_shared<ellipse>(vec2(150, 150), 0, 8, 14, color(250)));	
 	
 	//rect with reversed corners
 	theShapes.push_back(make_shared<Rect>(vec2(170, 80), vec2(120, 60), color(250), 8));
